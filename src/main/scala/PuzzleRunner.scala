@@ -19,9 +19,9 @@ object PuzzleRunner {
       for(day <- 1 to 25) {
         try {
           val objectName = f"Day$day%02d"
-          val o = puzzleReference(objectName)
+          val obj = puzzleReference(objectName)
           println(s"Results for day $day:")
-          printResults(o)
+          printResults(obj)
         }
         catch {
           case _: Throwable => // ignore
@@ -32,22 +32,25 @@ object PuzzleRunner {
     }
   }
 
-  private def printResults(o: CommonPuzzle): Unit = {
+  private def printResults(obj: CommonPuzzle): Unit = {
 
     try {
-      var result = o.partOne.toString
-      if (!isEmpty(result))
-        time {
+      var result : String = ""
+      time {
+        result = obj.partOne.toString
+        if (!isEmpty(result)) {
           print("part 1: " + result)
           print("    >   ")
         }
+      }
 
-      result = o.partTwo.toString
-      if (!isEmpty(result))
-        time {
+      time {
+        result = obj.partTwo.toString
+        if (!isEmpty(result)) {
           print("part 2: " + result)
           print("    >   ")
         }
+      }
     } catch {
       case _: NotImplementedError => // ignore
     }

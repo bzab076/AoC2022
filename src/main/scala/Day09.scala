@@ -31,8 +31,6 @@ object Day09 extends CommonPuzzle (9) {
     tailPositions2.size
   }
 
-
-
   def simulateMove1(direction : Char ) : Unit = {
 
     var newHead : (Int,Int) = headPos
@@ -55,6 +53,7 @@ object Day09 extends CommonPuzzle (9) {
     else { //move diagonally if required
       if(Math.abs(headPos._1-tailPos._1) > 1 || Math.abs(headPos._2 - tailPos._2) > 1) {
 
+        // try all 4 directions
         val newTail1 = (tailPos._1 + 1, tailPos._2 + 1)
         val newTail2 = (tailPos._1 + 1, tailPos._2 - 1)
         val newTail3 = (tailPos._1 - 1, tailPos._2 + 1)

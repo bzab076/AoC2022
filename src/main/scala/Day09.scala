@@ -22,7 +22,6 @@ object Day09 extends CommonPuzzle (9) {
 
   override def partTwo: Any = {
 
-    val moves = inputLines.map(line => (line.split(" ")(0).charAt(0), line.split(" ")(1).toInt))
     for(move <- moves) {
 
       for(_ <- 1 to move._2) {

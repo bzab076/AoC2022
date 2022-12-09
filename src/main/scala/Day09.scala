@@ -23,12 +23,10 @@ object Day09 extends CommonPuzzle (9) {
   override def partTwo: Any = {
 
     for(move <- moves) {
-
       for(_ <- 1 to move._2) {
         for(i <- 1 to 9)
         simulateMove2(move._1,i)
       }
-
     }
     tailPositions2.size
   }

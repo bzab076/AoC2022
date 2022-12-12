@@ -10,12 +10,13 @@ object Day12 extends CommonPuzzle (12) {
 
   override def partTwo: Any =  {
 
-    val coordinates = for (
+    val startCoordinates = for (
          x <- 0 until maxX;
-         y <- 0 until maxY)
-       yield (x, y)
+         y <- 0 until maxY
+         if value(x,y) == 'a'
+    ) yield (x, y)
 
-    coordinates.filter{case (x,y) => value(x,y) == 'a'}.map(s => GraphUtils.findCheapestPath(s,end, getNeighbours , getCost)).filter(_ > 0).min
+    startCoordinates.map(s => GraphUtils.findCheapestPath(s,end, getNeighbours , getCost)).min
   }
 
   def inputAsArrayOfChar: Array[Array[Char]] = {
@@ -39,15 +40,12 @@ object Day12 extends CommonPuzzle (12) {
     result
   }
 
-  def value(x : Int,y : Int) : Int = {
-    if(x==start._1 && y==start._2) 'a'.toInt
-    else if(x==end._1 && y==end._2) 'z'.toInt
-    else map(y)(x).toInt
-  }
+  def value(x : Int,y : Int) : Int = if(x==start._1 && y==start._2) 'a'
+    else if(x==end._1 && y==end._2) 'z'
+    else map(y)(x)
 
   def getNeighbours(x: Int, y: Int) : List[(Int,Int)] =
-    List( (x - 1, y), (x, y - 1), (x + 1, y), (x, y + 1)).filter { case (xx, yy) => xx >= 0 && yy >= 0 && xx< maxX && yy < maxY }
-      .filter{case (xx, yy) => (value(xx,yy) - value(x,y)) <= 1}
+    List( (x - 1, y), (x, y - 1), (x + 1, y), (x, y + 1)).filter { case (xx, yy) => xx >= 0 && yy >= 0 && xx< maxX && yy < maxY && (value(xx,yy) - value(x,y)) <= 1 }
 
   def getCost(p1 : (Int, Int), p2: (Int, Int)) : Int = 1
 }

@@ -32,7 +32,7 @@ object GraphUtils {
       }
     }
 
-    costMap.getOrElse(endNode,0)
+    costMap.getOrElse(endNode,Int.MaxValue)
   }
 
   def findAllCheapestPaths(startNode : (Int,Int), getNeighbours:(Int, Int) => List[(Int,Int)], cost:((Int, Int),(Int, Int)) => Int ) : Map[(Int, Int), (Int,List[(Int,Int)])] = {

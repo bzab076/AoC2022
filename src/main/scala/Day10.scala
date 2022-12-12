@@ -11,8 +11,8 @@ object Day10 extends CommonPuzzle (10) {
     var pixelPosition = 0
 
     def drawPixel(): Unit = {
-      pixelPosition = cycle  % 40
-      if (Math.abs(pixelPosition - register) < 2) print("#") else print(".")
+      pixelPosition = cycle % 40
+      if (Math.abs(pixelPosition - register) < 2) print("#") else print(" ")
       if (pixelPosition % 40 == 39) println()
     }
 
@@ -32,7 +32,7 @@ object Day10 extends CommonPuzzle (10) {
         cycle += 1
       }
       else {
-        val increment :Int = line.split(" ")(1).toInt
+        val increment:Int = line.split(" ")(1).toInt
         cycle += 1
         updateResult()
         drawPixel()

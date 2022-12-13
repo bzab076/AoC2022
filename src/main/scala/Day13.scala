@@ -70,7 +70,7 @@ object Day13 extends CommonPuzzle (13) {
       val tail = Element(v, List.empty)
       head.appended(tail)
     }
-    else if (line.startsWith("[") && line.endsWith("]")) { // head is a list
+    else if (line.startsWith("[") && line.endsWith("]")) { // head and tail are lists
       val fe = firstEnclosing(line)
       if(fe._2.isEmpty)
         List(Element(Int.MaxValue,parseLine(trimBrackets(line))))

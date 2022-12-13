@@ -9,26 +9,15 @@ object Day13 extends CommonPuzzle (13) {
 
   override def partTwo: Any = {
 
-    val allPackets = inputLines.filter(line => line.trim.nonEmpty).map(line => parseLine(trimBrackets(line)))
-    val allPacketsWithOrder = allPackets.map(pck => (allPackets.filter(p => p != pck).map(p2 => compareSignals(pck, p2)).count(v => v == -1),pck))
-    val sortedPackets = allPacketsWithOrder.sortWith(_._1 > _._1).map{case (_,b) => b}
     val div1 = parseLine(trimBrackets("[[2]]"))
     val div2 = parseLine(trimBrackets("[[6]]"))
-
-    var index : Int = 1
-    var index1 : Int = 0
-    var index2 : Int  = 0
-    for(pck <- sortedPackets) {
-      if(compareSignals(div1,pck) == -1 && index1==0) index1 = index
-      if(compareSignals(div2,pck) == -1 && index2==0) index2 = index + 1
-      index += 1
-    }
-
-    index1*index2
+    val allPackets = inputLines.filter(line => line.trim.nonEmpty).map(line => parseLine(trimBrackets(line))) ++ List(div1,div2)
+    allPackets.sortWith(orderSignals).zipWithIndex.filter{case (s,_) => s==div1 || s==div2}.map{case (_,i) => i+1}.product
   }
 
+  def orderSignals(list1 : List[Element], list2 : List[Element]) : Boolean = compareSignals(list1,list2) < 0
 
-  def compareSignals(list1 : List[Element], list2 : List[Element]) : Int ={
+  def compareSignals(list1 : List[Element], list2 : List[Element]) : Int = {
 
     var result = 0
     if(list1.isEmpty && list2.isEmpty) return 0

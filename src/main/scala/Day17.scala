@@ -14,21 +14,22 @@ object Day17 extends CommonPuzzle (17) {
 
   val jetStream: String = inputString
 
-  var rockPile: mutable.Set[(Int, Int)] = mutable.Set.empty
 
-  def canMoveRock(direction : (Int,Int), rock : List[(Int,Int)]) : Boolean = {
-    val potentialMove =  moveRock(direction,rock)
-    if(potentialMove.map{case (_,y) => y}.min <= 0) return false
-    if(potentialMove.map{case (x, _) => x}.min <= leftWall) return false
-    if(potentialMove.map{case (x, _) => x}.max >= rightWall) return false
-    potentialMove.forall(p => !rockPile.contains(p))
-  }
 
   def moveRock(direction : (Int,Int), rock : List[(Int,Int)]) : List[(Int,Int)] = rock.map{case (x,y) => (x+direction._1, y+direction._2)}
 
   def simulateRockFalling(steps : Int): Int = {
 
-    rockPile = mutable.Set.empty
+    val rockPile: mutable.Set[(Int, Int)] = mutable.Set.empty
+
+    def canMoveRock(direction : (Int,Int), rock : List[(Int,Int)]) : Boolean = {
+      val potentialMove =  moveRock(direction,rock)
+      if(potentialMove.map{case (_,y) => y}.min <= 0) return false
+      if(potentialMove.map{case (x, _) => x}.min <= leftWall) return false
+      if(potentialMove.map{case (x, _) => x}.max >= rightWall) return false
+      potentialMove.forall(p => !rockPile.contains(p))
+    }
+
     var currentBottom = 0
     var rockIndex = 0
     var jetIndex = 0
@@ -64,6 +65,8 @@ object Day17 extends CommonPuzzle (17) {
       //if((1 to 7).forall(x => rockPile.contains((x,currentBottom)))) println(s"********** $step    $currentBottom") // use this to find out where rock pile starts repeating
     }
     currentBottom
+
+
   }
 
 

@@ -25,7 +25,7 @@ object Day18 extends CommonPuzzle (18) {
     adjacent.map{ case(dx,dy,dz) => if(someGrid.contains((cube._1+dx,cube._2+dy,cube._3+dz))) 1 else 0}.sum
 
   def findAirPockets(someGrid: List[(Int, Int, Int)]): List[(Int, Int, Int)] = {
-    val airPockets0 = (for {
+    val airPockets = (for {
       x <- minX+1 to maxX-1
       y <- minY+1 to maxY-1
       z <- minZ+1 to maxZ-1
@@ -36,7 +36,7 @@ object Day18 extends CommonPuzzle (18) {
     } yield (x,y,z)).toList
 
     // remove outliers
-    airPockets0.filter(cube => adjacentCubes(cube,grid) + adjacentCubes(cube,airPockets0) == 6)
+    airPockets.filter(cube => adjacentCubes(cube,someGrid) + adjacentCubes(cube,airPockets) == 6)
   }
 
 }

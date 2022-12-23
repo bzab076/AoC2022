@@ -57,6 +57,7 @@ object Day22 extends CommonPuzzle (22) {
     generatePassword(x0, y0, d)
   }
 
+  // Moves around the map according to instructions and returns final position
   def moveAroundMap() : (Int, Int, (Int,Int)) = {
 
     var yPos = 0
@@ -66,8 +67,7 @@ object Day22 extends CommonPuzzle (22) {
     for(ins <- instructions) {
       counter += 1
       if(ins.length==1 && ins.charAt(0).isUpper) {
-        if(ins.charAt(0) == 'R') direction = (direction._2 * -1, direction._1)
-        else direction = (direction._2, direction._1 * -1)
+        direction = if(ins.charAt(0) == 'R')  Utils.rotateCounterClockwise(direction) else Utils.rotateClockwise(direction)
       }
       else {
         // move
@@ -104,6 +104,7 @@ object Day22 extends CommonPuzzle (22) {
     (xPos,yPos,direction)
   }
 
+  // Moves around the cube according to instructions and returns final position
   def moveAroundCube() : (Int, Int, Int, (Int,Int)) = {
 
     var yPos = 0
@@ -112,8 +113,7 @@ object Day22 extends CommonPuzzle (22) {
     var currentFace = 0
     for(ins <- instructions) {
       if(ins.length==1 && ins.charAt(0).isUpper) {
-        if(ins.charAt(0) == 'R') direction = (direction._2 * -1, direction._1)
-        else direction = (direction._2, direction._1 * -1)
+        direction = if(ins.charAt(0) == 'R')  Utils.rotateCounterClockwise(direction) else Utils.rotateClockwise(direction)
       }
       else {
         // move

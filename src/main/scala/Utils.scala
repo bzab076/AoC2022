@@ -10,6 +10,8 @@ object Utils {
   def getInverseRotationKey (fromVec : (Int,Int) , toVec : (Int,Int)) : String =
     rotationsMap.filter{case (_,matr) => rotate(matr,fromVec) == toVec}.head._1
 
+  def rotateClockwise(vector : (Int, Int)) : (Int,Int) = rotate(((0, 1), (-1,0)), vector)
+  def rotateCounterClockwise(vector : (Int, Int)) : (Int,Int) = rotate(((0, -1), (1,0)), vector)
 
   val rotationsMap : Map[String, ((Int, Int), (Int,Int))] = Map(
     "0" -> ((1, 0), (0,1)),

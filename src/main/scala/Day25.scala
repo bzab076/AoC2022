@@ -11,13 +11,13 @@ object Day25 extends CommonPuzzle (25) {
   // adds two SNAFU numbers
   def snafuAdd (operand1 : String, operand2 : String) : String = {
 
-    val len = Math.max(operand1.length,operand2.length) + 1
+    val len = Math.max(operand1.length,operand2.length)
     val op1 : Array[Char] = addLeadingZeroes(operand1,len).toCharArray.reverse
     val op2 : Array[Char] = addLeadingZeroes(operand2,len).toCharArray.reverse
 
     val sb : StringBuilder = new StringBuilder("")
     var overflow : Int = 0
-    for(i <- 0 until len-1) {
+    for(i <- 0 until len) {
       val sum : Int = snafu2digit(op1(i)) + snafu2digit(op2(i)) + overflow
       var digit = 0
       if(sum>2) {
@@ -34,9 +34,8 @@ object Day25 extends CommonPuzzle (25) {
       }
       sb.addAll(digit2snafu(digit))
     }
-    sb.addAll(digit2snafu(overflow))
-    val result = sb.toString().reverse
-    if(result.startsWith("0")) result.tail else result
+    if(overflow!=0) sb.addAll(digit2snafu(overflow))
+    sb.toString().reverse
   }
 
 }

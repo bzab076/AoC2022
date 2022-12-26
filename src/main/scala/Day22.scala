@@ -8,7 +8,7 @@ object Day22 extends CommonPuzzle (22) {
   val instructions: Seq[String] = parseInstructions()
 
   val faceSize = 50
-  val coordinatesMap : mutable.Map[(Int,(Int,Int)), (Int,Int)] = mutable.Map.empty
+  val faceMap : mutable.Map[Int, (Int,Int)] = mutable.Map.empty
   val faces : Array[Array[Array[Char]]] = determineFaces() // get faces from the part1 map
 
   // this map has to be populated manually for each input
@@ -53,8 +53,8 @@ object Day22 extends CommonPuzzle (22) {
 
   override def partTwo: Any = {
     val (f,x,y,d) = moveAroundCube()
-    val (x0,y0) = coordinatesMap.getOrElse((f,(x,y)), (0,0))
-    generatePassword(x0, y0, d)
+    val (dx,dy) = faceMap.getOrElse(f,(0,0))
+    generatePassword(x + dx, y + dy, d)
   }
 
   // Moves around the map according to instructions and returns final position
@@ -246,7 +246,7 @@ object Day22 extends CommonPuzzle (22) {
       for(x <- 0 until maxX) {
         if(map(y)(x) != ' ') {
           facesGrid(faceId + faceX / faceSize)(faceY)(faceX % faceSize) = map(y)(x)
-          coordinatesMap.addOne((faceId + faceX / faceSize,(faceX % faceSize,faceY)), (x,y))
+          if(!faceMap.contains(faceId + faceX / faceSize)) faceMap.addOne(faceId + faceX / faceSize, (x,y))
           faceX+=1
         }
       }

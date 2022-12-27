@@ -11,9 +11,7 @@ object Day17 extends CommonPuzzle (17) {
 
   val leftWall = 0
   val rightWall = 8
-
   val jetStream: String = inputString
-
 
 
   def moveRock(direction : (Int,Int), rock : List[(Int,Int)]) : List[(Int,Int)] = rock.map{case (x,y) => (x+direction._1, y+direction._2)}

@@ -4,7 +4,7 @@ import scala.collection.mutable
 
 object Day19 extends CommonPuzzle (19) {
 
-  // Warning: This is very inefficient solution. It need a lot of optimization and improvement.
+  // Warning: This is very inefficient solution. It needs a lot of optimization and improvement.
 
   val blueprints: List[Blueprint] = inputLines.map{ case s"Blueprint $id: Each ore robot costs $ore ore. Each clay robot costs $clay ore. Each obsidian robot costs $obs1 ore and $obs2 clay. Each geode robot costs $geode1 ore and $geode2 obsidian."
       => Blueprint(id.toInt, ore.toInt, clay.toInt, (obs1.toInt, obs2.toInt), (geode1.toInt, geode2.toInt))}
@@ -83,9 +83,9 @@ object Day19 extends CommonPuzzle (19) {
       }
 
     else {
-       canBoth = initialState.ore >= blueprint.clay + blueprint.ore && initialState.oreRobot < 5
+       canBoth = initialState.ore >= blueprint.clay + blueprint.ore && initialState.oreRobot < 4
        canClay = initialState.ore >= blueprint.clay
-       canOre =  initialState.ore >= blueprint.ore && initialState.oreRobot < 5
+       canOre =  initialState.ore >= blueprint.ore && initialState.oreRobot < 4
        newStates.addOne(initialState)
     }
 

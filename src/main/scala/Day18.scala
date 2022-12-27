@@ -15,7 +15,6 @@ object Day18 extends CommonPuzzle (18) {
   override def partTwo: Any = {
     val airPockets = findAirPockets(grid)
     surfaceArea(grid.appendedAll(airPockets))
-
   }
 
   def surfaceArea(someGrid: List[(Int, Int, Int)]): Int = someGrid.map(c => 6 - adjacentCubes(c, someGrid)).sum

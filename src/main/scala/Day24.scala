@@ -73,7 +73,6 @@ object Day24 extends CommonPuzzle (24) {
 
     val blizz: Set[Char] = Set('<','>','^','v')
     val blizzList : mutable.ArrayBuffer[(Int,Int,Char)] = mutable.ArrayBuffer.empty
-    //var x=0
     var y=0
     for(line <- inputLines) {
       for(x <- 0 until line.length) {

@@ -13,6 +13,21 @@ object Day17 extends CommonPuzzle (17) {
   val rightWall = 8
   val jetStream: String = inputString
 
+  override def partOne: Any = simulateRockFalling(2022)
+
+  override def partTwo: Any = {
+
+    val targetStep = 1000000000000L
+    val firstRepeatingStep = 866  // obtained using debug code and spreadsheet
+    val repeatAfterStep = 1705   // obtained using debug code and spreadsheet
+    val firstResidual = simulateRockFalling(firstRepeatingStep)
+    val repeatingValue = simulateRockFalling(firstRepeatingStep + repeatAfterStep) - firstResidual
+    val repeatsRequired = (targetStep - firstRepeatingStep) / repeatAfterStep
+    val lastResidualSteps = (targetStep - firstRepeatingStep) % repeatAfterStep
+    val lastResidual = simulateRockFalling(firstRepeatingStep + lastResidualSteps.toInt) - firstResidual
+    val result = repeatsRequired * repeatingValue + firstResidual + lastResidual
+    result
+  }
 
   def moveRock(direction : (Int,Int), rock : List[(Int,Int)]) : List[(Int,Int)] = rock.map{case (x,y) => (x+direction._1, y+direction._2)}
 
@@ -64,23 +79,5 @@ object Day17 extends CommonPuzzle (17) {
     }
     currentBottom
 
-
-  }
-
-
-  override def partOne: Any = simulateRockFalling(2022)
-
-  override def partTwo: Any = {
-
-    val targetStep = 1000000000000L
-    val firstRepeatingStep = 866  // obtained using debug code and spreadsheet
-    val repeatAfterStep = 1705   // obtained using debug code and spreadsheet
-    val firstResidual = simulateRockFalling(firstRepeatingStep)
-    val repeatingValue = simulateRockFalling(firstRepeatingStep + repeatAfterStep) - firstResidual
-    val repeatsRequired = (targetStep - firstRepeatingStep) / repeatAfterStep
-    val lastResidualSteps = (targetStep - firstRepeatingStep) % repeatAfterStep
-    val lastResidual = simulateRockFalling(firstRepeatingStep + lastResidualSteps.toInt) - firstResidual
-    val result = repeatsRequired * repeatingValue + firstResidual + lastResidual
-    result
   }
 }

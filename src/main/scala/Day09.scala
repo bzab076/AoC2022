@@ -1,12 +1,12 @@
-import scala.collection.mutable.Set
+import scala.collection.mutable
 
 object Day09 extends CommonPuzzle (9) {
 
   var headPos : (Int,Int) = (0,0)
   var tailPos : (Int,Int) = (0,0)
   var knots : Array[(Int,Int)] = Array((0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0),(0,0))
-  val tailPositions1 : Set[(Int,Int)] = Set((0,0))
-  val tailPositions2 : Set[(Int,Int)] = Set((0,0))
+  val tailPositions1 : mutable.Set[(Int,Int)] = mutable.Set((0,0))
+  val tailPositions2 : mutable.Set[(Int,Int)] = mutable.Set((0,0))
 
   val moves: Seq[(Char, Int)] = inputLines.map(line => line.split(" ")).map(a => (a(0).charAt(0),a(1).toInt))
 

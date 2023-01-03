@@ -10,7 +10,7 @@ object Day07 extends CommonPuzzle (7) {
   }
 
   override def partTwo: Any = {
-    val requiredSpace = 30000000- 70000000 + root.totalSize
+    val requiredSpace = 30000000 - 70000000 + root.totalSize
     root.sizeList.filter(s => s>=requiredSpace).min
   }
 

@@ -19,7 +19,6 @@ object Day18 extends CommonPuzzle (18) {
 
   def surfaceArea(someGrid: List[(Int, Int, Int)]): Int = someGrid.map(c => 6 - adjacentCubes(c, someGrid)).sum
 
-
   def adjacentCubes(cube: (Int, Int, Int), someGrid: List[(Int, Int, Int)]): Int =
     adjacent.map{ case(dx,dy,dz) => if(someGrid.contains((cube._1+dx,cube._2+dy,cube._3+dz))) 1 else 0}.sum
 

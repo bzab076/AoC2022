@@ -9,9 +9,9 @@ object Day15 extends CommonPuzzle (15) {
     val y = 2000000
     val minX = inputData.map{case (s, _, _) => s._1}.min
     val maxX = inputData.map{case (s, _, _) => s._1}.max
-    val maxdistance = inputData.map{case (_, _,d) => d}.max
+    val maxDistance = inputData.map{case (_, _,d) => d}.max
     var count = 0
-    for(x <- minX - maxdistance to maxX + maxdistance) {
+    for(x <- minX - maxDistance to maxX + maxDistance) {
        if(sensors.map{case (s,d) => Utils.manhattanDist((x,y),s)<=d}.foldLeft(false){(acc,c) => acc || c} && !beacons.contains((x,y)))  count += 1
     }
     count
